@@ -1,0 +1,29 @@
+{% include 'admin/adminheader.html' %}
+
+<div class="page-title-area" style="margin-bottom: 3rem;">
+	<h2 style="font-size: 2.2rem;">System Confirmation</h2>
+	<p style="color: var(--text-dim); margin-top: 8px;">Bureaucratic operation completed and confirmed via enterprise
+		protocols</p>
+</div>
+
+<div class="stat-card" style="max-width: 700px; margin: 4rem auto; text-align: center; padding: 5rem 3rem;">
+	<div
+		style="width: 100px; height: 100px; background: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 2.5rem; border: 2px solid rgba(16, 185, 129, 0.2); box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);">
+		✓
+	</div>
+
+	<h3 style="font-weight: 800; font-size: 1.8rem; color: var(--text-pure); margin-bottom: 1rem;">Protocol Execution
+		Successful</h3>
+	<p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 4rem; line-height: 1.8;">
+		The target identification record has been formally synchronized with the enterprise vault. All modifications are
+		now immutable and persistent within the system memory.
+	</p>
+
+	<div
+		style="display: flex; gap: 1.5rem; justify-content: center; border-top: 1px solid var(--border-glass); padding-top: 3rem;">
+		<a href="/show_emp" class="btn-premium" style="flex: 2;">Personnel Directory</a>
+		<a href="/dashboard" class="btn-premium btn-secondary" style="flex: 1;">Strategic Overview</a>
+	</div>
+</div>
+
+{% include 'footer.html' %}

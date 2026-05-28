@@ -1,0 +1,679 @@
+/* ═══════════════════════════════════════════════════════════
+   Lits HR ERP — Corporate Premium Design System
+   ═══════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Premium Brand Palette */
+  --p-indigo: #6366f1;
+  --p-cyan: #22d3ee;
+  --p-rose: #f43f5e;
+  --p-slate: #0f172a;
+  --p-slate-light: #1e293b;
+
+  /* Glass Specification */
+  --bg-glass: rgba(15, 23, 42, 0.65);
+  --bg-glass-bright: rgba(255, 255, 255, 0.03);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(25px) saturate(180%);
+
+  /* Shadows & Glows */
+  --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --glow-indigo: 0 0 25px rgba(99, 102, 241, 0.3);
+
+  /* Layout */
+  --radius-xl: 32px;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --sidebar-w: 280px;
+
+  /* Typography */
+  --text-pure: #ffffff;
+  --text-dim: #94a3b8;
+  --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Base Reset ───────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at 0% 0%, #1e1b4b 0%, #0f172a 100%);
+  background-attachment: fixed;
+  color: var(--text-pure);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+a {
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+/* ── Corporate Premium Header ─────────────────────────── */
+.site-header {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1400px;
+  z-index: 1000;
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 0.8rem 2rem;
+  box-shadow: var(--shadow-premium);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--p-indigo), var(--p-cyan));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: var(--glow-indigo);
+}
+
+.site-logo h1 {
+  font-size: 1.4rem;
+}
+
+.site-logo h1 span {
+  color: var(--p-indigo);
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.main-nav a {
+  color: var(--text-dim);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.main-nav a:hover,
+.main-nav li.active a {
+  color: var(--text-pure);
+}
+
+.nav-btn-login {
+  background: var(--p-indigo);
+  color: white !important;
+  padding: 10px 24px;
+  border-radius: 99px;
+  box-shadow: var(--glow-indigo);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* ── Floating Dashboard Shell ─────────────────────────── */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  border-right: 1px solid var(--border-glass);
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+}
+
+.main-content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  padding: 3rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 20px;
+  color: var(--text-dim);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-item.active .nav-link {
+  background: var(--bg-glass-bright);
+  color: var(--text-pure);
+}
+
+.nav-item.active .nav-link {
+  border: 1px solid var(--border-glass);
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.15), transparent);
+}
+
+/* ── Premium Form Grid & Controls ──────────────────── */
+.premium-form-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 3rem;
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-premium);
+  animation: floatUp 0.8s ease-out;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition);
+  width: 100%;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--p-indigo);
+  box-shadow: var(--glow-indigo);
+}
+
+/* Premium Custom Checkbox */
+.custom-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 10px;
+}
+
+.custom-checkbox-container input {
+  display: none;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.custom-checkbox-container:hover .checkmark {
+  border-color: var(--p-indigo);
+}
+
+.custom-checkbox-container input:checked+.checkmark {
+  background: var(--p-indigo);
+  border-color: var(--p-indigo);
+  box-shadow: var(--glow-indigo);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.custom-checkbox-container input:checked+.checkmark:after {
+  display: block;
+}
+
+/* Unified Button System */
+.btn-premium {
+  background: var(--p-indigo);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: var(--glow-indigo);
+}
+
+.btn-premium:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-pure);
+  border: 1px solid var(--border-glass);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Success/Error Alerts */
+.flash {
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: slideInRight 0.5s ease;
+}
+
+.flash-success {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 1px solid #10b981;
+}
+
+.flash-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid #ef4444;
+}
+
+/* ── Premium Chatbot Interface ────────────────────── */
+.chatbot-trigger {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(135deg, var(--p-indigo), var(--p-cyan));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  box-shadow: var(--glow-indigo);
+  z-index: 1001;
+  transition: var(--transition);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.chatbot-trigger:hover {
+  transform: scale(1.1) rotate(15deg);
+}
+
+.chat-window {
+  position: fixed;
+  bottom: 110px;
+  right: 30px;
+  width: 400px;
+  height: 600px;
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-premium);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+  transform-origin: bottom right;
+  transition: var(--transition);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8) translateY(20px);
+}
+
+.chat-window.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1) translateY(0);
+}
+
+.chat-header {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.chat-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--p-cyan);
+}
+
+.chat-body {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-glass) transparent;
+}
+
+.chat-msg {
+  max-width: 85%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.msg-bot {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.08);
+  border-bottom-left-radius: 4px;
+}
+
+.msg-user {
+  align-self: flex-end;
+  background: var(--p-indigo);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-footer {
+  padding: 1.2rem;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid var(--border-glass);
+}
+
+.chat-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  border-radius: 99px;
+  padding: 10px 18px;
+  color: white;
+  outline: none;
+}
+
+/* ── Stats & Intelligent Panel ──────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(225deg, transparent 80%, rgba(255, 255, 255, 0.05));
+  pointer-events: none;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--p-indigo);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-top: 12px;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* ── Tables ────────────────────────────────────────── */
+.glass-table-container {
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-premium);
+}
+
+.premium-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.premium-table th {
+  text-align: left;
+  padding: 1.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.03);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.premium-table td {
+  padding: 1.4rem;
+  border-top: 1px solid var(--border-glass);
+  font-size: 0.95rem;
+}
+
+.premium-table tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ── Status Badges ────────────────────────────────── */
+.badge {
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-present {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badge-absent {
+  background: rgba(244, 63, 94, 0.1);
+  color: #f43f5e;
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.badge-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+/* ── Animations ────────────────────────────────────── */
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .main-content {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 85px;
+    padding: 2.5rem 0.5rem;
+  }
+
+  .nav-link span,
+  .brand-area h2,
+  .site-logo h2 {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 85px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-window {
+    width: calc(100vw - 60px);
+    right: 30px;
+    bottom: 100px;
+  }
+}
+
+/* ── Error Pages ────────────────────────────── */
+.error-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
+}
+
+.error-code {
+  font-size: 10rem;
+  font-weight: 900;
+  background: linear-gradient(to bottom, #fff, transparent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.1;
+  line-height: 1;
+}
+
+.error-msg {
+  font-size: 1.5rem;
+  margin-top: -30px;
+  color: var(--text-pure);
+  font-weight: 300;
+}
+
+/* ── Premium Footer ───────────────────────────────── */
+.site-footer {
+  margin-top: auto;
+  padding: 3rem 2rem;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--border-glass);
+  text-align: center;
+  z-index: 10;
+}
+
+.site-footer p {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

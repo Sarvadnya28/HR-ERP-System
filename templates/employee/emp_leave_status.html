@@ -1,0 +1,63 @@
+{% include 'employee/empheader.html' %}
+
+<div class="page-title-area"
+    style="margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: flex-end;">
+    <div>
+        <h2 style="font-size: 2.2rem;">Leave Intelligence History</h2>
+        <p style="color: var(--text-dim); margin-top: 8px;">Chronological audit of absence requests and authorization
+            status</p>
+    </div>
+    <a href="/emp_apply_leave" class="btn-premium">New Application +</a>
+</div>
+
+<div class="stat-card" style="padding: 0; overflow: hidden;">
+    <table class="premium-table">
+        <thead>
+            <tr>
+                <th>Strategic ID</th>
+                <th>Effective Date</th>
+                <th>Rationale (Reason)</th>
+                <th style="text-align:center;">Auth Status</th>
+                <th style="text-align:right;">Submission Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for l in leaves %}
+            <tr style="transition: var(--transition);">
+                <td><span
+                        style="font-family: 'Outfit'; color: var(--p-indigo); font-weight: 700; font-size: 0.85rem;">#{{
+                        loop.index }}</span></td>
+                <td style="font-weight: 600; color: var(--text-pure);">{{ l[0] }}</td>
+                <td
+                    style="color: var(--text-dim); font-size: 0.85rem; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    {{ l[1] }}</td>
+                <td style="text-align:center;">
+                    {% if l[2] == 'Pending' %}
+                    <span class="badge badge-pending">PENDING</span>
+                    {% elif l[2] == 'Approved' %}
+                    <span class="badge badge-present">AUTHORIZED</span>
+                    {% else %}
+                    <span class="badge badge-absent">DECLINED</span>
+                    {% endif %}
+                </td>
+                <td style="text-align:right; color: var(--text-dim); font-size: 0.8rem;">{{ l[3].strftime('%d %b %Y') if l[3] else 'N/A' }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 5rem 0;">
+                    <div style="opacity: 0.5;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
+                        <p>No historical leave records detected in the vault.</p>
+                        <a href="/emp_apply_leave"
+                            style="color: var(--p-indigo); font-weight: 700; display: inline-block; margin-top: 1rem;">Initialize
+                            First Request →</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include 'footer.html' %}

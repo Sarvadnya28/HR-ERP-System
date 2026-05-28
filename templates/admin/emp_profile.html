@@ -1,0 +1,100 @@
+{% include 'admin/adminheader.html' %}
+
+<div class="page-title-area" style="margin-bottom: 3rem;">
+	<h2 style="font-size: 2.2rem;">Personnel Intelligence File</h2>
+	<p style="color: var(--text-dim); margin-top: 8px;">View and modify high-performance identification records for
+		<strong>EMP #{{ record_list[0][0] }}</strong></p>
+</div>
+
+{% for n in record_list %}
+<div style="display: grid; grid-template-columns: 350px 1fr; gap: 3rem; align-items: start;">
+
+	<!-- Left sidebar: Identity Artifacts -->
+	<div class="stat-card" style="text-align: center; padding: 3rem 2rem;">
+		<div style="position: relative; width: 140px; height: 140px; margin: 0 auto 2.5rem;">
+			{% if n[7] and n[7] != 'default.png' %}
+			<img src="/static/uploads/{{ n[7] }}" alt="{{ n[1] }}"
+				style="width: 100%; height: 100%; border-radius: 25px; object-fit: cover; border: 3px solid var(--border-glass); box-shadow: var(--glow-indigo);">
+			{% else %}
+			<div
+				style="width: 100%; height: 100%; border-radius: 25px; background: var(--p-indigo); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 800; color: white;">
+				{{ n[1][0]|upper }}
+			</div>
+			{% endif %}
+		</div>
+
+		<h3 style="font-size: 1.4rem; color: var(--text-pure); margin-bottom: 5px;">{{ n[1] }}</h3>
+		<p
+			style="color: var(--p-cyan); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">
+			{{ n[4] }}</p>
+
+		<div
+			style="text-align: left; display: flex; flex-direction: column; gap: 1.2rem; padding-top: 2rem; border-top: 1px solid var(--border-glass); margin-top: 2rem;">
+			<div style="display: flex; justify-content: space-between;">
+				<span style="color: var(--text-dim); font-size: 0.75rem; font-weight: 700;">STRATEGIC ID</span>
+				<span style="color: var(--text-pure); font-size: 0.8rem; font-weight: 700; font-family: 'Outfit';">#{{
+					n[0] }}</span>
+			</div>
+			<div style="display: flex; justify-content: space-between;">
+				<span style="color: var(--text-dim); font-size: 0.75rem; font-weight: 700;">REMUNERATION</span>
+				<span style="color: var(--p-cyan); font-size: 0.8rem; font-weight: 800;">₹ {{ n[3] }}</span>
+			</div>
+			<div style="display: flex; justify-content: space-between;">
+				<span style="color: var(--text-dim); font-size: 0.75rem; font-weight: 700;">IDENTITY EMAIL</span>
+				<span style="color: var(--text-pure); font-size: 0.8rem; font-weight: 600;">{{ n[2] }}</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- Right: Modification Interface -->
+	<div class="stat-card" style="padding: 3rem;">
+		<h4
+			style="font-size: 1.1rem; color: var(--text-pure); margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 15px;">
+			Edit Identifying Parameters</h4>
+
+		<form action="/emp_update_delete?e_id={{ n[0] }}" method="post">
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+				<div class="form-group">
+					<label class="form-label">Full Identity Name</label>
+					<input class="glass-input" type="text" name="txtName" value="{{ n[1] }}" required>
+				</div>
+
+				<div class="form-group">
+					<label class="form-label">Corporate Email Address</label>
+					<input class="glass-input" type="email" name="txtEmail" value="{{ n[2] }}" required>
+				</div>
+
+				<div class="form-group">
+					<label class="form-label">Strategic Contact (Mobile)</label>
+					<input class="glass-input" type="tel" name="txtMobile" value="{{ n[5] }}" required>
+				</div>
+
+				<div class="form-group">
+					<label class="form-label">Assigned Designation</label>
+					<input class="glass-input" type="text" name="txtDesignation" value="{{ n[4] }}" required>
+				</div>
+
+				<div class="form-group" style="grid-column: span 2;">
+					<label class="form-label">Remuneration Tier (Gross Monthly)</label>
+					<input class="glass-input" type="number" name="txtSalary" value="{{ n[3] }}" required>
+				</div>
+			</div>
+
+			<div style="margin-top: 4rem; display: flex; gap: 1.5rem; justify-content: flex-end;">
+				<a href="/show_emp" class="btn-premium btn-secondary">Abort Edit</a>
+				<button type="submit" name="btn_name" value="Delete" class="btn-premium"
+					style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2);"
+					onclick="return confirm('Permanently erase this personnel record from the vault?')">
+					Terminate Identiy 🗑
+				</button>
+				<button type="submit" name="btn_name" value="Update" class="btn-premium">
+					Commit Modifications ✓
+				</button>
+			</div>
+		</form>
+	</div>
+
+</div>
+{% endfor %}
+
+{% include 'footer.html' %}

@@ -1,0 +1,59 @@
+{% include 'header.html' %}
+
+<!-- HERO MINI -->
+<section style="padding: 10rem 2rem 5rem; text-align: center; position: relative; overflow: hidden;">
+    <div style="position: absolute; top:0; left:50%; transform: translateX(-50%); width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 70%); z-index: -1;"></div>
+    
+    <div style="display:inline-block; padding: 8px 18px; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.2); border-radius: 99px; font-size: 0.75rem; font-weight: 800; color: var(--p-cyan); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem; animation: floatUp 0.6s ease-out;">
+        Corporate Intelligence Identity
+    </div>
+    
+    <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; animation: floatUp 0.8s ease-out;">Strategic <span style="color: var(--p-indigo);">Overview</span></h1>
+    <p style="max-width: 700px; margin: 0 auto; color: var(--text-dim); font-size: 1.1rem; line-height: 1.8; animation: floatUp 1s ease-out;">
+        Defining the future of workforce management through high-precision engineering and data-driven philosophy. 
+        Lits HR ERP is not just a tool; it's a competitive advantage.
+    </p>
+</section>
+
+<!-- CONTENT MODULES -->
+<section style="padding: 4rem 2rem 8rem; max-width: 1200px; margin: 0 auto;">
+    <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+        
+        <!-- Mission -->
+        <div class="stat-card" style="padding: 3rem; animation: floatUp 1.2s ease-out;">
+            <div style="font-size: 2.5rem; margin-bottom: 1.5rem;">🎯</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--p-indigo);">Enterprise Mission</h3>
+            <p style="color: var(--text-dim); line-height: 1.7;">
+                To empower global organizations with absolute transparency and control over their personnel ecosystems. 
+                We believe in simplifying complexity through elegant design and robust architecture.
+            </p>
+        </div>
+
+        <!-- Capability -->
+        <div class="stat-card" style="padding: 3rem; border-color: var(--p-cyan); animation: floatUp 1.4s ease-out;">
+            <div style="font-size: 2.5rem; margin-bottom: 1.5rem;">⚙️</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--p-cyan);">System Capabilities</h3>
+            <p style="color: var(--text-dim); line-height: 1.7;">
+                From high-velocity identity synchronization to predictive attendance trending, our platform is built 
+                on an immutable MySQL backbone and high-performance Python logic for seamless scaling.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Corporate Identity -->
+    <div class="stat-card" style="margin-top: 3rem; padding: 4rem; text-align: center; border-color: var(--border-glass); animation: floatUp 1.6s ease-out;">
+        <h4 style="font-size: 0.8rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 0.2em;">Architected By</h4>
+        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Lakshya IT <span style="color: var(--p-indigo);">Solutions</span></h2>
+        <p style="max-width: 800px; margin: 0 auto 2.5rem; color: var(--text-dim); line-height: 1.8;">
+            A premier software engineering firm specializing in mission-critical enterprise ERP systems. 
+            Delivering excellence across sectors through cutting-edge full-stack development and database integrity.
+        </p>
+        <div style="display: flex; gap: 20px; justify-content: center;">
+            <a href="/contactus" class="btn-premium">Connect with Us</a>
+            <a href="/" class="btn-premium btn-secondary">← Back to Terminal</a>
+        </div>
+    </div>
+</section>
+
+{% include 'footer.html' %}

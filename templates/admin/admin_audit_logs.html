@@ -1,0 +1,52 @@
+{% include 'admin/adminheader.html' %}
+
+<div class="page-title-area" style="margin-bottom: 3rem;">
+    <h2 style="font-size: 2.2rem;">Forensic Security Audit</h2>
+    <p style="color: var(--text-dim); margin-top: 8px;">Immutable chronological sequence of all strategic administrative
+        operations and authentication events</p>
+</div>
+
+<div class="stat-card" style="padding: 0; overflow: hidden;">
+    <table class="premium-table">
+        <thead>
+            <tr>
+                <th style="width: 250px;">Precision Timestamp (UTC)</th>
+                <th>Authorized Actor</th>
+                <th>Enterprise Operation</th>
+                <th>Security Context / Intelligence</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr style="transition: var(--transition);">
+                <td
+                    style="color: var(--p-cyan); font-size: 0.8rem; font-family: 'JetBrains Mono', 'Courier New', monospace; font-weight: 700;">
+                    {{ log[4].strftime('%Y-%m-%d %H:%M:%S.%f')[:-3] if log[4] else 'N/A' }}
+                </td>
+                <td>
+                    <span class="badge"
+                        style="background: rgba(99, 102, 241, 0.1); color: var(--p-indigo); font-weight: 800; text-transform: uppercase;">
+                        {{ log[1] }}
+                    </span>
+                </td>
+                <td
+                    style="font-weight: 700; color: var(--text-pure); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">
+                    {{ log[2] }}
+                </td>
+                <td style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.5;">{{ log[3] }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 5rem 0;">
+                    <div style="opacity: 0.5;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🛡️</div>
+                        <p>No security audit events recorded in the current epoch.</p>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include 'footer.html' %}

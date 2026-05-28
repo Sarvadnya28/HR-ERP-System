@@ -1,0 +1,102 @@
+{% include 'employee/empheader.html' %}
+
+<div class="page-title-area" style="margin-bottom: 3rem;">
+    <h2 style="font-size: 2.2rem;">Enterprise Portal</h2>
+    <p style="color: var(--text-dim); margin-top: 8px;">Welcome back, <strong>{{ session.get('emp_name', 'Employee')
+            }}</strong>. Professional workspace initialized.</p>
+</div>
+
+<!-- Premium Stat Grid -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-label">Daily Presence</div>
+        <div class="stat-value">
+            {% if today_att %}
+            <span class="badge badge-present">RECORDED</span>
+            {% else %}
+            <span class="badge badge-absent">MISSING</span>
+            {% endif %}
+        </div>
+        <div
+            style="font-size: 0.7rem; color: var(--text-dim); margin-top: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;">
+            CYCLE: {{ day_name }}
+        </div>
+    </div>
+
+    <div class="stat-card" style="border-color: var(--p-cyan);">
+        <div class="stat-label">Authorized Absence</div>
+        <div class="stat-value" style="color: var(--p-cyan);">{{ approved_leaves }} DAYS</div>
+        <div
+            style="font-size: 0.7rem; color: var(--text-dim); margin-top: 15px; font-weight: 800; text-transform: uppercase;">
+            QUOTA UTILIZED: {{ "%.1f"|format((approved_leaves/total_leaves)*100) if total_leaves > 0 else 0 }}%
+        </div>
+    </div>
+
+    <div class="stat-card" style="border-color: #10b981;">
+        <div class="stat-label">Retained Balance</div>
+        <div class="stat-value" style="color: #10b981;">{{ total_leaves - approved_leaves }}</div>
+        <div style="font-size: 0.7rem; color: #10b981; margin-top: 15px; font-weight: 800; text-transform: uppercase;">
+            FISCAL QUOTA: {{ total_leaves }}
+        </div>
+    </div>
+</div>
+
+<div style="display:grid; grid-template-columns: 1.8fr 1.2fr; gap: 3rem;">
+
+    <!-- Personnel Operations -->
+    <div class="stat-card" style="padding: 2.5rem;">
+        <h4 style="font-size: 1.1rem; color: var(--text-pure); margin-bottom: 2rem;">⚡ Operations Console</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <a href="/emp_mark_attendance" class="stat-card"
+                style="padding: 1.8rem; text-align: center; background: rgba(255,255,255,0.03); margin: 0;">
+                <div style="font-size: 2rem; margin-bottom: 12px;">📷</div>
+                <div style="font-weight: 700; color: var(--text-pure); font-size: 1rem;">Capture Attendance</div>
+                <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 8px;">Synchronize daily presence</p>
+            </a>
+            <a href="/emp_apply_leave" class="stat-card"
+                style="padding: 1.8rem; text-align: center; background: rgba(255,255,255,0.03); margin: 0;">
+                <div style="font-size: 2rem; margin-bottom: 12px;">📝</div>
+                <div style="font-weight: 700; color: var(--text-pure); font-size: 1rem;">Apply Provision</div>
+                <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 8px;">Submit leave application</p>
+            </a>
+            <a href="/emp_leave_status" class="stat-card"
+                style="padding: 1.8rem; text-align: center; background: rgba(255,255,255,0.03); margin: 0;">
+                <div style="font-size: 2rem; margin-bottom: 12px;">📋</div>
+                <div style="font-weight: 700; color: var(--text-pure); font-size: 1rem;">Provision Track</div>
+                <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 8px;">Monitor request status</p>
+            </a>
+            <a href="/emp_my_profile" class="stat-card"
+                style="padding: 1.8rem; text-align: center; background: rgba(255,255,255,0.03); margin: 0;">
+                <div style="font-size: 2rem; margin-bottom: 12px;">🛡️</div>
+                <div style="font-weight: 700; color: var(--text-pure); font-size: 1rem;">Security Profile</div>
+                <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 8px;">Manage credentials</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Corporate Bulletin -->
+    <div class="stat-card" style="padding: 2.5rem;">
+        <h4 style="font-size: 1.1rem; color: var(--text-pure); margin-bottom: 2rem;">📢 Strategic Broadcasts</h4>
+        <div class="notice-list">
+            {% for notice in notices %}
+            <div style="padding: 1.5rem 0; border-bottom: 1px solid var(--border-glass);">
+                <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-pure); margin-bottom: 8px;">{{
+                    notice[0] }}</div>
+                <div style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.6; margin-bottom: 12px;">{{
+                    notice[1][:100] }}...</div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span
+                        style="font-size: 0.65rem; font-weight: 800; color: var(--p-indigo); text-transform: uppercase;">BULLETIN</span>
+                    <span style="font-size: 0.75rem; color: var(--text-dim);">{{ notice[2].strftime('%d %b') if notice[2] else 'N/A' }}</span>
+                </div>
+            </div>
+            {% else %}
+            <div style="text-align: center; padding: 3rem 0;">
+                <p style="color: var(--text-dim);">No active broadcasts found.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}

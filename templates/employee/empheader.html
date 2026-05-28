@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Panel — {{ branding.get('system_name', 'Lits HR ERP') }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        :root {
+            --primary: {
+                    {
+                    branding.get('primary_color', '#17c3b2')
+                }
+            }
+
+            ;
+
+            --accent: {
+                    {
+                    branding.get('accent_color', '#22b391')
+                }
+            }
+
+            ;
+        }
+
+        .emp-topbar {
+            background: linear-gradient(90deg, #0d2640, #1a3a5c);
+            border-bottom: 2px solid #17c3b2;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .emp-topbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 64px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="site-logo" style="margin-bottom: 3rem; padding: 0 1rem;">
+                <div class="logo-icon">E</div>
+                <h2>LITS <span>EMP</span></h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-item {{ 'active' if request.path == '/emp_home' }}">
+                    <a href="/emp_home" class="nav-link">🏠 <span>Dashboard</span></a>
+                </div>
+                <div class="nav-item {{ 'active' if request.path == '/emp_my_profile' }}">
+                    <a href="/emp_my_profile" class="nav-link">👤 <span>My Profile</span></a>
+                </div>
+                <div class="nav-item {{ 'active' if request.path == '/emp_change_password' }}">
+                    <a href="/emp_change_password" class="nav-link">🔑 <span>Security</span></a>
+                </div>
+                <div class="nav-item {{ 'active' if request.path == '/emp_apply_leave' }}">
+                    <a href="/emp_apply_leave" class="nav-link">📝 <span>Apply Leave</span></a>
+                </div>
+                <div class="nav-item {{ 'active' if request.path == '/emp_leave_status' }}">
+                    <a href="/emp_leave_status" class="nav-link">📋 <span>Leave Status</span></a>
+                </div>
+                <div class="nav-item {{ 'active' if request.path == '/emp_mark_attendance' }}">
+                    <a href="/emp_mark_attendance" class="nav-link">🕒 <span>Attendance</span></a>
+                </div>
+            </nav>
+
+            <div style="margin-top: auto; padding: 1rem;">
+                <a href="/emp_logout" class="nav-link" style="color: var(--p-rose);">⏻ <span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Logic -->
+        <main class="main-content">
+            <header class="top-header"
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4rem;">
+                <div
+                    style="font-weight: 600; color: var(--text-dim); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;">
+                    Employee / <span style="color: var(--p-indigo);">{{ request.path[5:].replace('_', ' ').title() if
+                        request.path != '/emp_home' else 'Dashboard' }}</span>
+                </div>
+
+                <div
+                    style="display: flex; align-items: center; gap: 20px; background: var(--bg-glass); padding: 8px 20px; border-radius: 99px; border: 1px solid var(--border-glass);">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div
+                            style="width: 32px; height: 32px; background: var(--p-indigo); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem;">
+                            {{ session.get('emp_name', 'E')[0]|upper }}
+                        </div>
+                        <div style="font-size: 0.85rem; font-weight: 600;">{{ session.get('emp_name', 'Employee') }}
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-container" style="animation: floatUp 0.6s ease-out;">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                {% include 'chatbot.html' %}

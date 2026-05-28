@@ -1,0 +1,70 @@
+{% include 'admin/adminheader.html' %}
+
+<div class="page-title-area" style="margin-bottom: 3rem;">
+    <h2 style="font-size: 2.2rem;">Leave Authorization Engine</h2>
+    <p style="color: var(--text-dim); margin-top: 8px;">Audit and authorize workforce absence requests through the
+        enterprise control layer</p>
+</div>
+
+<div class="stat-card" style="padding: 0; overflow: hidden;">
+    <table class="premium-table">
+        <thead>
+            <tr>
+                <th>Strategic ID</th>
+                <th>Identity</th>
+                <th>Leave Date</th>
+                <th>Rationale (Reason)</th>
+                <th style="text-align:center;">Auth Status</th>
+                <th style="text-align:right;">Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for l in leaves %}
+            <tr style="transition: var(--transition);">
+                <td><span
+                        style="font-family: 'Outfit'; color: var(--p-indigo); font-weight: 700; font-size: 0.85rem;">{{
+                        l[1] }}</span></td>
+                <td><strong>{{ l[2] }}</strong></td>
+                <td style="font-weight: 600; color: var(--text-pure);">{{ l[3] }}</td>
+                <td
+                    style="color: var(--text-dim); font-size: 0.85rem; max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    {{ l[4] }}</td>
+                <td style="text-align:center;">
+                    {% if l[5] == 'Pending' %}
+                    <span class="badge badge-pending">PENDING</span>
+                    {% elif l[5] == 'Approved' %}
+                    <span class="badge badge-present">AUTHORIZED</span>
+                    {% else %}
+                    <span class="badge badge-absent">DECLINED</span>
+                    {% endif %}
+                </td>
+                <td style="text-align:right;">
+                    {% if l[5] == 'Pending' %}
+                    <form action="/leave_action" method="post"
+                        style="display:inline-flex; gap:0.5rem; justify-content: flex-end;">
+                        <input type="hidden" name="leave_id" value="{{ l[0] }}">
+                        <button type="submit" name="action" value="Approved" class="btn-premium"
+                            style="padding: 8px 16px; font-size: 0.8rem; background: #10b981; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);">Authorize</button>
+                        <button type="submit" name="action" value="Rejected" class="btn-premium btn-secondary"
+                            style="padding: 8px 16px; font-size: 0.8rem; color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">Decline</button>
+                    </form>
+                    {% else %}
+                    <span style="color: var(--text-dim); font-size: 0.8rem; font-weight: 700;">PROCESSED</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 5rem 0;">
+                    <div style="opacity: 0.5;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📝</div>
+                        <p>No pending absence requests detected in the authorization queue.</p>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include 'footer.html' %}

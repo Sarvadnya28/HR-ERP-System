@@ -1,0 +1,78 @@
+{% include 'admin/adminheader.html' %}
+
+<div class="page-title-area" style="margin-bottom: 3rem;">
+    <h2 style="font-size: 2.2rem;">Global Configuration</h2>
+    <p style="color: var(--text-dim); margin-top: 8px;">Manage organizational branding, theme protocols, and security
+        lockdown states</p>
+</div>
+
+<div class="premium-form-container" style="max-width: 900px;">
+    <form action="/admin_settings" method="POST">
+        <!-- Branding Identity -->
+        <h4
+            style="font-size: 1rem; color: var(--text-pure); margin-bottom: 2rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 15px;">
+            Corporate Identity
+        </h4>
+
+        <div class="form-group" style="margin-bottom: 2rem;">
+            <label class="form-label">Organizational System Name</label>
+            <input type="text" name="system_name" class="glass-input" value="{{ settings['system_name'] }}" required>
+            <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 8px;">This name appears across the entire
+                platform.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+            <div class="form-group">
+                <label class="form-label">Primary Brand Color</label>
+                <div
+                    style="display: flex; gap: 15px; align-items: center; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border: 1px solid var(--border-glass);">
+                    <input type="color" name="primary_color" value="{{ settings['primary_color'] }}"
+                        style="width: 45px; height: 45px; border: none; border-radius: 8px; cursor: pointer; background: none;">
+                    <span style="font-family: monospace; font-weight: 700; color: var(--text-pure);">{{
+                        settings['primary_color'] }}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Accent Highlight Color</label>
+                <div
+                    style="display: flex; gap: 15px; align-items: center; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border: 1px solid var(--border-glass);">
+                    <input type="color" name="accent_color" value="{{ settings['accent_color'] }}"
+                        style="width: 45px; height: 45px; border: none; border-radius: 8px; cursor: pointer; background: none;">
+                    <span style="font-family: monospace; font-weight: 700; color: var(--text-pure);">{{
+                        settings['accent_color'] }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Protocol -->
+        <h4
+            style="font-size: 1rem; color: var(--text-pure); margin-bottom: 2rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 15px;">
+            Security & Maintenance
+        </h4>
+
+        <div
+            style="display: flex; align-items: center; gap: 2rem; padding: 2rem; background: rgba(244, 63, 94, 0.05); border-radius: var(--radius-lg); border: 1px solid rgba(244, 63, 94, 0.2); margin-bottom: 3rem;">
+            <div style="font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(244, 63, 94, 0.3));">🛡️</div>
+            <div style="flex: 1;">
+                <span
+                    style="display: block; font-weight: 800; color: #f43f5e; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;">Administrative
+                    Lockdown</span>
+                <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 6px; line-height: 1.6;">Enabling this
+                    will terminate active sessions and block new portal access until disabled.</p>
+            </div>
+            <label class="custom-checkbox-container" style="margin: 0;">
+                <input type="checkbox" name="lockdown_mode" value="on" {% if settings['lockdown_mode']=='on' %}checked{%
+                    endif %}>
+                <span class="checkmark" style="width: 32px; height: 32px; border-radius: 10px;"></span>
+            </label>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn-premium" style="max-width: 350px;">
+                Commit System Configuration
+            </button>
+        </div>
+    </form>
+</div>
+
+{% include 'footer.html' %}

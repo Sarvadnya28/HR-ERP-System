@@ -1,0 +1,61 @@
+{% include 'admin/adminheader.html' %}
+
+<div class="page-title-area" style="margin-bottom: 3rem;">
+	<h2 style="font-size: 2.2rem;">Directory Intelligence</h2>
+	<p style="color: var(--text-dim); margin-top: 8px;">Synchronized results for query parameter: <strong
+			style="color: var(--p-indigo);">"{{ search_term }}"</strong></p>
+</div>
+
+<div class="stat-card" style="padding: 0; overflow: hidden;">
+	<table class="premium-table">
+		<thead>
+			<tr>
+				<th style="width: 150px;">Personnel ID</th>
+				<th>Full Identity Name</th>
+				<th>Designation Context</th>
+				<th style="text-align:right;">Administrative Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for n in record_list %}
+			<tr style="transition: var(--transition);">
+				<td><span
+						style="font-family: 'Outfit'; color: var(--p-indigo); font-weight: 700; font-size: 0.85rem;">#{{
+						n[0] }}</span></td>
+				<td style="font-weight: 700; color: var(--text-pure);">{{ n[1] }}</td>
+				<td>
+					<span class="badge"
+						style="background: rgba(34, 211, 238, 0.1); color: var(--p-cyan); border: 1px solid rgba(34, 211, 238, 0.3);">
+						{{ n[2]|upper }}
+					</span>
+				</td>
+				<td style="text-align:right;">
+					<a href="/emp_profile?e_id={{ n[0] }}" class="btn-premium"
+						style="padding: 8px 20px; font-size: 0.8rem; width: auto; background: var(--bg-glass-bright); border: 1px solid var(--border-glass);">
+						Intelligence Review →
+					</a>
+				</td>
+			</tr>
+			{% else %}
+			<tr>
+				<td colspan="4" style="text-align:center; padding: 5rem 2rem;">
+					<div style="opacity: 0.5;">
+						<div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+						<p>No personnel records identified matching query context "{{ search_term }}".</p>
+						<a href="/search_emp"
+							style="color: var(--p-indigo); font-weight: 700; display: inline-block; margin-top: 1rem;">Attempt
+							Re-Query →</a>
+					</div>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div style="margin-top: 3rem; display: flex; gap: 1.5rem;">
+	<a href="/search_emp" class="btn-premium">Initialize New Lookup Request</a>
+	<a href="/show_emp" class="btn-premium btn-secondary">Full Enterprise Directory</a>
+</div>
+
+{% include 'footer.html' %}

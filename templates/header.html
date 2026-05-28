@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Lits HR ERP System — Streamline your HR operations" />
+	<title>{{ branding.get('system_name', 'Lits HR ERP') }}</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<style>
+		:root {
+			--primary: {
+					{
+					branding.get('primary_color', '#6366f1')
+				}
+			}
+
+			;
+
+			--secondary: {
+					{
+					branding.get('accent_color', '#06b6d4')
+				}
+			}
+
+			;
+		}
+	</style>
+</head>
+
+<body>
+
+	<header class="site-header">
+		<div class="header-inner">
+			<a href="/" class="site-logo" style="text-decoration:none;">
+				<div class="logo-icon">HR</div>
+				<h1><span>{{ branding.get('system_name', 'Lits HR ERP').split(' ')[0] }}</span> {{ '
+					'.join(branding.get('system_name', 'Lits HR ERP').split(' ')[1:]) }}</h1>
+			</a>
+			<nav class="main-nav">
+				<ul id="main-nav-list">
+					<li><a href="/">Home</a></li>
+					<li><a href="/aboutus">About</a></li>
+					<li><a href="/contactus">Contact</a></li>
+					<li><a href="/empLogin">Employee Login</a></li>
+					<li><a href="/adminLogin" class="nav-btn-login">Admin Login</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+    
+    <div class="flash-container" style="position: fixed; top: 100px; right: 40px; z-index: 1100; max-width: 400px;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+    </div>
+
+    {% include 'chatbot.html' %}
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const currentPath = window.location.pathname;
+			const navLinks = document.querySelectorAll('#main-nav-list a');
+			navLinks.forEach(link => {
+				if (link.getAttribute('href') === currentPath) {
+					link.parentElement.classList.add('active');
+				} else if (currentPath === '/' && link.getAttribute('href') === '/') {
+					link.parentElement.classList.add('active');
+				}
+			});
+		});
+	</script>

@@ -1,0 +1,40 @@
+{% include 'admin/adminheader.html' %}
+
+<div class="page-title-area" style="margin-bottom: 3rem;">
+	<h2 style="font-size: 2.2rem;">Operation Acknowledged</h2>
+	<p style="color: var(--text-dim); margin-top: 8px;">Organizational record processing completed successfully via
+		enterprise protocols</p>
+</div>
+
+<div class="stat-card" style="max-width: 700px; margin: 4rem auto; text-align: center; padding: 5rem 3rem;">
+	<div
+		style="width: 100px; height: 100px; background: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 2.5rem; border: 2px solid rgba(16, 185, 129, 0.2); box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);">
+		✓
+	</div>
+
+	<h3 style="font-weight: 800; font-size: 1.8rem; color: var(--text-pure); margin-bottom: 1rem;">Personnel Registered
+		Successfully</h3>
+	<p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 4rem; line-height: 1.8;">
+		{% if emp_name %}
+		The employee record for <strong style="color: var(--p-indigo);">{{ emp_name }}</strong> has been formally
+		committed to the enterprise database and synchronized with the identity vault.
+		{% else %}
+		The new personnel record has been successfully added to the system and is now active.
+		{% endif %}
+	</p>
+
+	<div
+		style="display: flex; gap: 1.5rem; justify-content: center; border-top: 1px solid var(--border-glass); padding-top: 3rem;">
+		<a href="/emp_Registration" class="btn-premium" style="flex: 1;">Register Another</a>
+		<a href="/show_emp" class="btn-premium btn-secondary" style="flex: 1;">Global Directory</a>
+	</div>
+
+	<div style="margin-top: 2rem;">
+		<a href="/dashboard"
+			style="color: var(--text-dim); font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: var(--transition);">
+			← Return to Executive Dashboard
+		</a>
+	</div>
+</div>
+
+{% include 'footer.html' %}

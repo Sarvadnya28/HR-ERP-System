@@ -1,0 +1,81 @@
+{% include 'admin/adminheader.html' %}
+
+<div class="page-title-area" style="margin-bottom: 3rem;">
+	<h2 style="font-size: 2.2rem;">Personnel Enrollment</h2>
+	<p style="color: var(--text-dim); margin-top: 8px;">Initialize new identity parameters and synchronize credentials
+		with the Enterprise Vault</p>
+</div>
+
+<div class="premium-form-container" style="max-width: 900px; margin: 0 auto;">
+
+	{% with messages = get_flashed_messages(with_categories=true) %}
+	{% if messages %}
+	{% for category, message in messages %}
+	<div class="flash flash-{{ category }}">{{ message }}</div>
+	{% endfor %}
+	{% endif %}
+	{% endwith %}
+
+	<form action="/emp_Registration_process" method="post" enctype="multipart/form-data">
+		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;">
+
+			<div class="form-group" style="grid-column: span 2;">
+				<label class="form-label">Strategic Personnel ID (Identification Key)</label>
+				<input class="glass-input" type="text" name="txtEmpId" placeholder="e.g. LITS-SR-1024" required>
+				<p style="margin-top: 8px; font-size: 0.75rem; color: var(--text-dim);">This unique key will be the
+					primary identifier in the identity vault.</p>
+			</div>
+
+			<div class="form-group">
+				<label class="form-label">Full Identity Name</label>
+				<input class="glass-input" type="text" name="txtName" placeholder="Full legal name" required>
+			</div>
+
+			<div class="form-group">
+				<label class="form-label">Corporate Email Address</label>
+				<input class="glass-input" type="email" name="txtEmail" placeholder="email@enterprise.com" required>
+			</div>
+
+			<div class="form-group">
+				<label class="form-label">Security Credentials (Password)</label>
+				<input class="glass-input" type="password" name="txtPassword" placeholder="••••••••" required>
+			</div>
+
+			<div class="form-group">
+				<label class="form-label">Designation Assignment</label>
+				<input class="glass-input" type="text" name="txtDesignation"
+					placeholder="e.g. Senior Intelligence Officer" required>
+			</div>
+
+			<div class="form-group">
+				<label class="form-label">Contact Synchronization (Mobile)</label>
+				<input class="glass-input" type="tel" name="txtMobile" placeholder="+91 00000 00000" required>
+			</div>
+
+			<div class="form-group">
+				<label class="form-label">Remuneration Tier (Salary)</label>
+				<input class="glass-input" type="number" name="txtSalary" placeholder="Gross monthly magnitude"
+					required>
+			</div>
+
+			<div class="form-group" style="grid-column: span 2;">
+				<label class="form-label">Identity Visual Artifact (Photo)</label>
+				<div
+					style="background: rgba(255,255,255,0.03); padding: 2rem; border-radius: 20px; border: 1px dashed var(--border-glass);">
+					<input class="glass-input" style="padding: 10px;" type="file" name="photo" accept="image/*"
+						required>
+					<p style="margin-top: 10px; font-size: 0.75rem; color: var(--text-dim);">Supported formats: JPEG,
+						PNG. Maximum resolution: 4K.</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div style="margin-top: 4rem; display: flex; gap: 1.5rem; justify-content: flex-end;">
+			<button type="reset" class="btn-premium btn-secondary">Clear Buffer</button>
+			<button type="submit" class="btn-premium">Commit Enrollment ✓</button>
+		</div>
+	</form>
+</div>
+
+{% include 'footer.html' %}

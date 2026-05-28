@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Admin Panel — {{ branding.get('system_name', 'Lits HR ERP') }}</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<style>
+		:root {
+			--primary: {
+					{
+					branding.get('primary_color', '#6366f1')
+				}
+			}
+
+			;
+
+			--secondary: {
+					{
+					branding.get('accent_color', '#06b6d4')
+				}
+			}
+
+			;
+		}
+	</style>
+</head>
+
+<body class="bg-light">
+
+	<div class="app-container">
+		<!-- Sidebar -->
+		<aside class="sidebar">
+			<div class="site-logo" style="margin-bottom: 3rem; padding: 0 1rem;">
+				<div class="logo-icon">L</div>
+				<h2>LITS <span>ERP</span></h2>
+			</div>
+
+			<nav class="sidebar-nav">
+				<div class="nav-item {{ 'active' if request.path == '/dashboard' }}">
+					<a href="/dashboard" class="nav-link">🏠 <span>Dashboard</span></a>
+				</div>
+				<div class="nav-item {{ 'active' if request.path == '/emp_Registration' }}">
+					<a href="/emp_Registration" class="nav-link">➕ <span>Registration</span></a>
+				</div>
+				<div class="nav-item {{ 'active' if request.path == '/show_emp' }}">
+					<a href="/show_emp" class="nav-link">👥 <span>Directory</span></a>
+				</div>
+				<div class="nav-item {{ 'active' if request.path == '/search_emp' }}">
+					<a href="/search_emp" class="nav-link">🔍 <span>Search</span></a>
+				</div>
+				<div class="nav-item {{ 'active' if request.path == '/admin_leaves' }}">
+					<a href="/admin_leaves" class="nav-link">📋 <span>Leaves</span></a>
+				</div>
+				<div class="nav-item {{ 'active' if request.path == '/admin_attendance' }}">
+					<a href="/admin_attendance" class="nav-link">📅 <span>Attendance</span></a>
+				</div>
+				<div class="nav-item {{ 'active' if request.path == '/admin_notices' }}">
+					<a href="/admin_notices" class="nav-link">📢 <span>Broadcasts</span></a>
+				</div>
+				<div class="nav-item {{ 'active' if request.path == '/admin_settings' }}">
+					<a href="/admin_settings" class="nav-link">⚙️ <span>Settings</span></a>
+				</div>
+				<div class="nav-item {{ 'active' if request.path == '/admin_audit_logs' }}">
+					<a href="/admin_audit_logs" class="nav-link">🛡️ <span>Audit Logs</span></a>
+				</div>
+			</nav>
+
+			<div style="margin-top: auto; padding: 1rem;">
+				<a href="/logout" class="nav-link" style="color: var(--p-rose);">⏻ <span>Logout</span></a>
+			</div>
+		</aside>
+
+		<!-- Main Logic -->
+		<main class="main-content">
+			<header class="top-header"
+				style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4rem;">
+				<div
+					style="font-weight: 600; color: var(--text-dim); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;">
+					Admin / <span style="color: var(--p-indigo);">{{ request.path[1:].replace('_', ' ').title()
+						}}</span>
+				</div>
+
+				<div
+					style="display: flex; align-items: center; gap: 20px; background: var(--bg-glass); padding: 8px 20px; border-radius: 99px; border: 1px solid var(--border-glass);">
+					<div style="display: flex; align-items: center; gap: 12px;">
+						<div
+							style="width: 32px; height: 32px; background: var(--p-indigo); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem;">
+							A</div>
+						<div style="font-size: 0.85rem; font-weight: 600;">{{ session.get('name', 'Admin') }}</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="page-container" style="animation: floatUp 0.6s ease-out;">
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+				<div class="flash-container">
+					{% for category, message in messages %}
+					<div class="flash flash-{{ category }}">{{ message }}</div>
+					{% endfor %}
+				</div>
+				{% endif %}
+				{% endwith %}
+
+				{% include 'chatbot.html' %}

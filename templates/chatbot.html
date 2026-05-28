@@ -1,0 +1,83 @@
+<!-- Premium AI Chatbot Template -->
+<div class="chatbot-trigger" id="chatTrigger" title="AI Assistant">
+    <span>🤖</span>
+</div>
+
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        <div class="logo-icon" style="width: 32px; height: 32px; font-size: 0.8rem;">HR</div>
+        <div>
+            <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-pure);">AI Personal Assistant</div>
+            <div style="font-size: 0.75rem; color: var(--p-cyan); font-weight: 600;">System Online</div>
+        </div>
+        <button id="closeChat"
+            style="margin-left: auto; background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 1.2rem;">&times;</button>
+    </div>
+
+    <div class="chat-body" id="chatMessages">
+        <div class="chat-msg msg-bot">
+            Hello! I'm your Enterprise Intelligence Assistant. How can I help you today?
+        </div>
+    </div>
+
+    <div class="chat-footer">
+        <input type="text" id="chatInput" class="chat-input" placeholder="Type a message..." autocomplete="off">
+        <button id="sendBtn" class="logo-icon"
+            style="width: 40px; height: 40px; border: none; cursor: pointer; border-radius: 50%; padding: 0;">
+            <span style="transform: rotate(-45deg); display: block;">➤</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const trigger = document.getElementById('chatTrigger');
+        const window = document.getElementById('chatWindow');
+        const closeBtn = document.getElementById('closeChat');
+        const input = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const messages = document.getElementById('chatMessages');
+
+        function toggleChat() {
+            window.classList.toggle('active');
+            if (window.classList.contains('active')) input.focus();
+        }
+
+        trigger.addEventListener('click', toggleChat);
+        closeBtn.addEventListener('click', toggleChat);
+
+        async function sendMessage() {
+            const text = input.value.trim();
+            if (!text) return;
+
+            // Add user message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg msg-user';
+            userDiv.textContent = text;
+            messages.appendChild(userDiv);
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+
+            try {
+                const response = await fetch('/ai_assistant', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await response.json();
+
+                // Add bot response
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg msg-bot';
+                botDiv.innerHTML = data.response; // Using innerHTML to support markdown formatting if needed
+                messages.appendChild(botDiv);
+                messages.scrollTop = messages.scrollHeight;
+            } catch (error) {
+                console.error('Chat Error:', error);
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        input.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+    });
+</script>
